@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export ZK_VERSION=3.4.6
+export EXHIBITOR_VER=1.5.6
 export ZK_RELEASE=http://www.apache.org/dist/zookeeper/zookeeper-$ZK_VERSION/zookeeper-$ZK_VERSION.tar.gz
 
 mkdir -p exhibitor-bundle/exhibitor
