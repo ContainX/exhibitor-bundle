@@ -1,0 +1,7 @@
+FROM java:8
+
+RUN mkdir /src
+COPY . /src
+WORKDIR /src
+
+RUN cd /src && ./build.sh

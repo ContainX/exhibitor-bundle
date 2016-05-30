@@ -1,0 +1,16 @@
+sudo: required
+
+language: node_js
+node_js:
+  - "5"
+
+services:
+  - docker
+
+script:
+  - make all
+
+# whitelist
+branches:
+  only:
+    - master
