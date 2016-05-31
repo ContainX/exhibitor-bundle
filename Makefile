@@ -1,7 +1,7 @@
 LAST_TAG := $(shell git describe --abbrev=0 --tags)
 ZK_VERSION = 3.4.6
 EXHIBITOR_VER = 1.5.6
-EXECUTABLE := exhibitor-bundle_$(EXHIBITOR_VER)-$(ZK_VERSION)-$(TRAVIS_BUILD_NUMBER).tgz
+EXECUTABLE := exhibitor-bundle.tgz
 
 all: compile
 
@@ -11,8 +11,14 @@ compile:
 	docker cp build-cont:/src/exhibitor-bundle.tgz ./$(EXECUTABLE)
 	docker rm -f build-cont
 
-release:
-	git tag -a v$(RELEASE) -m 'release $(RELEASE)'
+release-docker:
+	git tag -a $(RELEASE) -m 'release $(RELEASE)'
 	git push && git push --tags
-	docker run -it containx/github-release release -u containx -r exhibitor-bundle -t v$(RELEASE) -n v$(RELEASE)
-  docker run -it -v $(pwd):/data containx/github-release release -u containx -r exhibitor-bundle -t v$(RELEASE) -n v$(RELEASE) -f $(EXECUTABLE)
+	docker run -it -e GITHUB_TOKEN=$(GITHUB_TOKEN) containx/github-release release -u containx -r exhibitor-bundle -t $(RELEASE) -n $(RELEASE)
+  docker run -it -e GITHUB_TOKEN=$(GITHUB_TOKEN) -v $(pwd):/data containx/github-release upload -u containx -r exhibitor-bundle -t $(RELEASE) -n $(EXECUTABLE) -f $(EXECUTABLE)
+
+release:
+#		git tag -a $(RELEASE) -m 'release $(RELEASE)'
+#		git push && git push --tags
+#		github-release release -u containx -r exhibitor-bundle -t $(RELEASE) -n $(RELEASE)
+	  github-release upload -u containx -r exhibitor-bundle -t $(RELEASE) -n $(EXECUTABLE) -f $(EXECUTABLE)
