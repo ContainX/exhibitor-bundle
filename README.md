@@ -5,9 +5,9 @@ This repository is used to package Exhibitor and Zookeeper into a single artifac
 
 This build uses Docker as it's build environment.
 
-### Versioning
+### Releases
 
-Versioning is in the format of ```exhibitor-bundle_{ exhibitor version}-{ zk version}-{ build }.tgz```
+Releases can be found at: https://github.com/ContainX/exhibitor-bundle/releases
 
 ### References
 
