@@ -1,9 +1,6 @@
 #!/bin/bash
 
-export ZK_VERSION=3.4.6
-export EXHIBITOR_VER=1.5.6
-export ZK_RELEASE=http://www.apache.org/dist/zookeeper/zookeeper-$ZK_VERSION/zookeeper-$ZK_VERSION.tar.gz
-
+# Exhibitor
 mkdir -p exhibitor-bundle/exhibitor
 git clone https://github.com/dcos/exhibitor.git
 cd exhibitor
@@ -13,7 +10,15 @@ mv exhibitor-standalone/src/main/resources/buildscripts/standalone/gradle/build/
 cd ..
 curl -Lo exhibitor-bundle/zookeeper.tgz $ZK_RELEASE
 cd exhibitor-bundle
+
+# ZooKeepr
 tar -xvzf zookeeper.tgz && rm zookeeper.tgz
+mv zookeeper-$ZK_VERSION zookeeper
 rm -rf zookeeper/{src,docs,contrib}
+
+# Supporting files
+mv ../support/* ./
+
+# Packaging
 cd ..
 tar -cvzf exhibitor-bundle.tgz exhibitor-bundle/

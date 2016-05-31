@@ -1,5 +1,10 @@
 FROM java:8
 
+ENV ZK_VERSION=3.4.6
+ENV EXHIBITOR_VER=1.5.6
+ENV ZK_RELEASE=http://www.apache.org/dist/zookeeper/zookeeper-$ZK_VERSION/zookeeper-$ZK_VERSION.tar.gz
+
+
 RUN mkdir /src
 COPY . /src
 WORKDIR /src

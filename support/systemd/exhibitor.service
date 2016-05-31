@@ -1,0 +1,13 @@
+[Unit]
+Description=Exhibitor: Zookeeper Supervisor Service
+After=network-online.target
+[Service]
+StandardOutput=journal
+StandardError=journal
+Restart=always
+StartLimitInterval=0
+RestartSec=5
+MountFlags=private
+RuntimeDirectory=exhibitor
+EnvironmentFile=/opt/exhibitor-bundle/etc/environment
+ExecStart=/opt/exhibitor-bundle/bin/start_exhibitor.sh
